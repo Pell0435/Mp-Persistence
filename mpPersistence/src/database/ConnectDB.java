@@ -1,85 +1,70 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnectDB {
 
-	
-private static final String serverAddress = "\"jdbc:sqlserver://hildur.ucn.dk:1433";
-private static final String databaseName = ";databaseName=DMA-CSD-S243_10632126";
-private static String userName = ";user=DMA-CSD-S243_10632126";
-private static String password = ";password=Password1!";
-private static String encryption = ";encrypt=false";
-
-private static Connection ctn;
-private DatabaseMetaData dmd;
-
-private static ConnectDB instance = null;
+	private static ConnectDB instance;
+	private static Connection connection;
 
 	private ConnectDB() {
-
-	String url = serverAddress + databaseName + userName + password + encryption;
-	System.out.println("URL Address: " + url);
-	
 		try {
+		       
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			System.out.println("Driver ok");
-		}
-		
-		catch(Exception e) {
-			System.out.println("Could not find the driver");
-		}
-	
-		try{
-		ctn = DriverManager.getConnection(url);
-		ctn.setAutoCommit(true);
-		dmd = ctn.getMetaData();
-		System.out.println("Connected to " + dmd.getURL());
-		}
-	
-		catch(Exception e) {
-		System.out.println("Database connection failed");
-		System.out.println(e.getMessage());
-		System.out.println(url);
+
+			String url = "jdbc:sqlserver://hildur.ucn.dk:1433;databaseName=DMA-CSD-S243_10632126;encrypt=false;trustServerCertificate=true";
+			String user = "DMA-CSD-S243_10632126";
+			String password = "Password1!";
+			
+			//opret forbindelse til databse
+			connection = DriverManager.getConnection(url, user, password);
+			System.out.println("Database forbundet sucessfuldt!");
+            
+            //detaljeret fejlbesked hvis forbindelsen mislykkedes
+		} catch (ClassNotFoundException e) {
+	        System.err.println("SQL Server JDBC Driver not found.");
+	        e.printStackTrace();
+	        
+		}catch (SQLException e){
+			System.err.println("Database forbindelse fejlede...");
+	        e.printStackTrace();
 		}
 	}
 	
-	public static void closeConnection() {
-		try {
-		ctn.close();
-		instance = null;
-		System.out.println("Connection was successfully lost");
-		}
-		catch(Exception e){
-		System.out.println("Database was not closed successfully " + e.getMessage());
-	}
-}
-
-	public Connection getDatabaseConnection() {
-		return ctn;
-}
-
-	public static boolean instanceNull() {
-		return (instance == null);
-}
 	public static ConnectDB getInstance() {
-		if (instance == null) {
+		if(instance == null) {
 			instance = new ConnectDB();
 		}
 		return instance;
+	} 
+	
+	public Connection getConnection() {
+		return connection;
 	}
 	
-	public static boolean getStatus() {
-		boolean isOpen = false;
-		try {
-			isOpen = (!ctn.isClosed());
-		}
-		catch (Exception sclExc) {
-			isOpen = false;
-		}
-		return isOpen;
-	}
-
+	 public static void closeConnection() {
+	       	try{
+	            connection.close();
+	            instance= null;
+	            System.out.println("The connection is closed");
+	        }
+	         catch (Exception e){
+	            System.out.println("Error trying to close the database " +  e.getMessage());
+	         }
+	    }
+	 public static boolean instanceNull() {
+	       return (instance == null);
+	    }    
+	 
+	 public static boolean getStatus() {
+	    	boolean isOpen = false;
+	    	try {
+	    		isOpen = (!connection.isClosed());
+	    	} catch (Exception sclExc) {
+	    		isOpen = false;
+	    	}
+	    	return isOpen;
+	    }
 }
