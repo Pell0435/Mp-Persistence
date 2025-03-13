@@ -7,10 +7,10 @@ import java.sql.DriverManager;
 public class ConnectDB {
 
 	
-private static final String serverAddress = ";hildur.ucn.dk";
+private static final String serverAddress = "\"jdbc:sqlserver://hildur.ucn.dk:1433";
 private static final String databaseName = ";databaseName=DMA-CSD-S243_10632126";
-private static String userName = ";DMA-CSD-S243_10632126";
-private static String password = ";Password1!";
+private static String userName = ";user=DMA-CSD-S243_10632126";
+private static String password = ";password=Password1!";
 private static String encryption = ";encrypt=false";
 
 private static Connection ctn;
