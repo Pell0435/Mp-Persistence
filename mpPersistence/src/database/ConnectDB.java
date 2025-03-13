@@ -23,6 +23,15 @@ private static ConnectDB instance = null;
 	String url = serverAddress + databaseName + userName + password + encryption;
 	System.out.println("URL Address: " + url);
 	
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			System.out.println("Driver ok");
+		}
+		
+		catch(Exception e) {
+			System.out.println("Could not find the driver")
+		}
+	
 		try{
 		ctn = DriverManager.getConnection(url);
 		ctn.setAutoCommit(true);
