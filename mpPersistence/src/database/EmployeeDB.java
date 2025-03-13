@@ -15,28 +15,38 @@ public class EmployeeDB implements IEmployeeDB {
 		 this.connection = ConnectDB.getInstance().getConnection();
 	}
 
-	private Employee FindEmployeeByEmployeeID(String employeeID) {
-		String sql = "SELECT employeeID FROM Employee";
+	public Employee FindEmployeeByEmployeeID(int employeeID) {
+		String sql = "SELECT * FROM Employee WHERE employeeID = ?";
 	  try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-        stmt.setString(1, employeeID);
+        stmt.setInt(1, employeeID);
         ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {
-            // Create and return an Employee object with all attributes
+   
             return new Employee(
                 rs.getString("employeeID"),
-                rs.getString("name"),
-                rs.getString("phoneNo"),
-                rs.getString("email"),
-                rs.getString("role")
+                rs.getString("emp_Name"),
+                rs.getString("emp_PhoneNo"),
+                rs.getString("emp_Email"),
+                rs.getString("emp_Role")
             );
         }
 	} catch (SQLException e) {
         System.err.println("Error retrieving employee: " + e.getMessage());
     }
 
-    return null; // Return null if no employee is found
-}
+    return null;
+	}
 	
+	 public static void main(String[] args) {
+	        EmployeeDB employeeDB = new EmployeeDB();
+	        Employee emp = employeeDB.FindEmployeeByEmployeeID(02);
+
+	        if (emp != null) {
+	            System.out.println("Employee Found: " + emp.getName());
+	        } else {
+	            System.out.println("Employee not found.");
+	        }
+	    }
 	
 }
