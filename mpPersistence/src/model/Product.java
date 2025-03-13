@@ -1,5 +1,5 @@
 package model;
-// Author: Thomas (Getters og setters)
+// Author: Thomas og Pelle (Getters og setters)
 public class Product {
 	//All of the private things
 	private String barcode;
@@ -10,7 +10,7 @@ public class Product {
 	private double purchasePrice;
 	private double salesPrice;
 	private double rentPrice;
-	private Supplier Supplier
+	private String countryOfOrigin;
 	 
 	
 // A lot of getter's	
@@ -42,9 +42,6 @@ public String getName() {
 	 return barcode;
  }
  
- public String getCategory() {
-	 return category;
- }
  
  public int getMinStock() {
 	 return minStock;
@@ -60,7 +57,7 @@ public String getName() {
  }
  
  public void setRentPrice (double newRentPrice) {
-	 this.rentprice = newRentprice;
+	 this.rentPrice = newRentPrice;
  }
  
  public void SetName (String newName) {
@@ -87,9 +84,6 @@ public String getName() {
 	 this.barcode = newBarcode;
  }
  
- public void setCategory (String newCategory) {
-	 this.category = newCategory;
- }
  
  public void setMinStock (int newMinStock) {
 	 this.minStock = newMinStock;
