@@ -44,6 +44,28 @@ public class CustomerDB implements ICustomerDB{
 	    return null;
 		}
 		
+	public void findAllCustomers() {
+	    String sql = "SELECT * FROM Customer";
+
+	    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+	        ResultSet rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+	           
+	            System.out.println("Name: " + rs.getString("cus_Name"));
+	            System.out.println("Email: " + rs.getString("cus_Email"));
+	            System.out.println("customerCategory"+rs.getString("customerCategory"));
+	            System.out.println("cus_Address" + rs.getString("cus_Address"));
+	            System.out.println("cus_Zipcode"+ rs.getString("cus_Zipcode"));
+	            System.out.println("cus_City" +rs.getString("cus_City"));
+	            System.out.println("Phone: " + rs.getString("cus_PhoneNo"));  
+	            System.out.println("Customer ID: " + rs.getInt("customerID"));
+	            System.out.println("----------------------------");
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving customers: " + e.getMessage());
+	  }
+	}
 		 public static void main(String[] args) {
 		        CustomerDB customerDB = new CustomerDB();
 		        Customer cus = customerDB.FindCustomerByCustomerID(02);
