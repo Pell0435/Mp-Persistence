@@ -29,7 +29,7 @@ private static ConnectDB instance = null;
 		}
 		
 		catch(Exception e) {
-			System.out.println("Could not find the driver")
+			System.out.println("Could not find the driver");
 		}
 	
 		try{
