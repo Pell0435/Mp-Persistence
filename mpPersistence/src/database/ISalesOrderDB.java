@@ -1,5 +1,7 @@
 package database;
 
-public interface ISalesOrderDB {
+import model.SalesOrder;
 
+public interface ISalesOrderDB {
+	SalesOrder FindSalesOrderByOrderNo(int orderNo);
 }
