@@ -14,7 +14,7 @@ public class ConnectDB {
 		       
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-			String url = "jdbc:sqlserver://hildur.ucn.dk:1433;databaseName=DMA-CSD-S243_10632126;encrypt=false;trustServerCertificate=true";
+			String url = "jdbc:sqlserver://hildur.ucn.dk:1433;databaseName=DMA-CSD-S243_10632126;encrypt=true;trustServerCertificate=true";
 			String user = "DMA-CSD-S243_10632126";
 			String password = "Password1!";
 			

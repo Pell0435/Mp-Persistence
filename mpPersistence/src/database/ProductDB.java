@@ -44,13 +44,13 @@ public class ProductDB {
 		return connection;
 	}
 	
-	/*public void addProduct(Product product) {
+	public void addProduct(Product product) {
 	    String query = "INSERT INTO Products (productName, purchasePrice, salesPrice, rentPricePerUnit, countryOfOrigin, minStock, productID, productType, barcode, ssid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	    try (PreparedStatement stmt = connection.prepareStatement(query)) {
 	        stmt.setString(1, product.getName());  // productName
 	        stmt.setDouble(2, product.getPurchasePrice());  // purchasePrice
 	        stmt.setDouble(3, product.getSalesPrice());  // salesPrice
-	        stmt.setDouble(4, product.getRentPrice());  // rentPricePerUnit
+	        stmt.setDouble(4, product.getRentPricePerUnit());  // rentPricePerUnit
 	        stmt.setString(5, product.getCountryOfOrigin());  // countryOfOrigin
 	        stmt.setInt(6, product.getMinStock());  // minStock
 	        stmt.setString(7, product.getProductID());  // productID (Primary Key)
@@ -62,6 +62,6 @@ public class ProductDB {
 	        e.printStackTrace();  // Handles any SQL errors
 	    }
 	}
-	*/
+	
 	
 }
