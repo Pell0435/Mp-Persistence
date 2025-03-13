@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import model.Employee;
 
 public class EmployeeDB implements IEmployeeDB {
@@ -38,15 +39,28 @@ public class EmployeeDB implements IEmployeeDB {
     return null;
 	}
 	
-	 public static void main(String[] args) {
-	        EmployeeDB employeeDB = new EmployeeDB();
-	        Employee emp = employeeDB.FindEmployeeByEmployeeID(02);
+	public void findAllEmployees() {
+	    String sql = "SELECT * FROM Employee";
 
-	        if (emp != null) {
-	            System.out.println("Employee Found: " + emp.getName());
-	        } else {
-	            System.out.println("Employee not found.");
+	    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+	        ResultSet rs = stmt.executeQuery();
+
+	        while (rs.next()) {
+	            System.out.println("Employee ID: " + rs.getString("employeeID"));
+	            System.out.println("Name: " + rs.getString("emp_Name"));
+	            System.out.println("Phone: " + rs.getString("emp_PhoneNo"));
+	            System.out.println("Email: " + rs.getString("emp_Email"));
+	            System.out.println("Role: " + rs.getString("emp_Role"));
+	            System.out.println("----------------------------");
 	        }
-	    }
+	    } catch (SQLException e) {
+	        System.err.println("Error retrieving employees: " + e.getMessage());
+	  }
+	}
+	 
+	public static void Main(String[] args) {
+	    EmployeeDB employeeDB = new EmployeeDB();
+	    employeeDB.findAllEmployees();
+	}
 	
 }
