@@ -1,38 +1,67 @@
 package database;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
 
 import model.Product;
-// Author er Thomas
+// Author er Thomas og Mikal
 public class ProductDB {
 
 	private static ProductDB instance;
-	private ArrayList<Product> products;
+	private Connection connection;
 	
-	//Instance
-	public static ProductDB getIntance() {
+	
+	private ProductDB(){
+		try {
+	       
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+			String url = "jdbc:sqlserver://hildur.ucn.dk:1433;databaseName=DMA-CSD-S243_10632126;encrypt=true;trustServerCertificate=true";
+			String user = "DMA-CSD-S243_10632126";
+			String password = "Password1!";
+			
+			//opret forbindelse til databse
+			connection = DriverManager.getConnection(url, user, password);
+			System.out.println("Database forbundet sucessfuldt!");
+            
+            //detaljeret fejlbesked hvis forbindelsen mislykkedes
+		} catch (ClassNotFoundException e) {
+	        System.err.println("SQL Server JDBC Driver not found.");
+	        e.printStackTrace();
+	        
+		}catch (SQLException e){
+			System.err.println("Database forbindelse fejlede...");
+	        e.printStackTrace();
+		}
+	}
+	
+	public static ProductDB getInstance() {
 		if(instance == null) {
 			instance = new ProductDB();
 		}
 		return instance;
-	} // 
-	private ProductDB(){
-		products = new ArrayList<>();
+	} 
+	
+	public Connection getConnection() {
+		return connection;
 	}
-	// AddProduct
-	public void addProduct (Product p) throws IllegalArgumentException {
-		if(findByProductID(p.getProductID()) == null) {
-			Product res = null;
-			for (int i = 0 ; i <products.size() && res == null; i++) {
-				if(products.get(i).getProductID().equalsIgnoreCase(CustomerID)) {
-					res = Product.get(i);
-				}
-		}
-		return res;
+	
+	/*public void addProduct(Product product) {
+	    String query = "INSERT INTO Products (productName, purchasePrice, salesPrice, rentPricePerUnit, countryOfOrigin, minStock, productID, productType, barcode, ssid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+	        stmt.setString(1, product.getName());  // productName
+	        stmt.setDouble(2, product.getPurchasePrice());  // purchasePrice
+	        stmt.setDouble(3, product.getSalesPrice());  // salesPrice
+	        stmt.setDouble(4, product.getRentPrice());  // rentPricePerUnit
+	        stmt.setString(5, product.getCountryOfOrigin());  // countryOfOrigin
+	        stmt.setInt(6, product.getMinStock());  // minStock
+	        stmt.setString(7, product.getProductID());  // productID (Primary Key)
+	        stmt.setString(8, product.getCategory());  // productType
+	        stmt.setString(9, product.getBarcode());  // barcode (Unique)
+	        stmt.setString(10, product.getSsid());  // ssid (Foreign Key)
+	        stmt.executeUpdate();  // Executes SQL INSERT
+	    } catch (SQLException e) {
+	        e.printStackTrace();  // Handles any SQL errors
+	    }
 	}
-
-	public List<Product> findAll() {
-		return new ArrayList<>(this.products);
-	}
+	*/
 	
 }
