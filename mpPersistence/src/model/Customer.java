@@ -10,8 +10,22 @@ public class Customer {
 	private String zipcode;
 	private String city;
 	private String customerCategory;
-	private int customerId;
-
+	private int customerID;
+	
+	
+	public Customer(String name,String address,String phoneNo, String email,String zipcode,String city, String customerCategory,int customerID) {
+	this.name = name;
+	this.address = address;
+	this.phoneNo = phoneNo;
+	this.email = email;
+	this.zipcode = zipcode;
+	this.city = city;
+	this.customerCategory = customerCategory;
+	this.customerID = customerID;
+	
+	
+	}
+	
 //Getter's incoming!
 public String getName() {
 	return name;
@@ -39,8 +53,8 @@ public String getCustomerCategory() {
 	return customerCategory;
 }
 
-public int getCustomerId(){
-	return customerId;
+public int getCustomerID(){
+	return customerID;
 }
 // Her kommer setter's
 
@@ -72,7 +86,7 @@ public void setCustomerCategory(String newCustomerCategory) {
 	this.customerCategory = newCustomerCategory;
 }
 
-public void setCustomerId(int newCustomerId) {
-	this.customerId = newCustomerId;
+public void setCustomerID(int newCustomerID) {
+	this.customerID = newCustomerID;
 }
 }
