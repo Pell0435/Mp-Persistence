@@ -22,7 +22,7 @@ public class EmployeeDB implements IEmployeeDB {
         ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {
-            // Create and return an Employee object with all attributes
+   
             return new Employee(
                 rs.getString("employeeID"),
                 rs.getString("emp_Name"),
@@ -35,7 +35,7 @@ public class EmployeeDB implements IEmployeeDB {
         System.err.println("Error retrieving employee: " + e.getMessage());
     }
 
-    return null; // Return null if no employee is found
+    return null;
 	}
 	
 	 public static void main(String[] args) {
