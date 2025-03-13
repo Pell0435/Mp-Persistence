@@ -46,7 +46,7 @@ public String getName() {
  public int getMinStock() {
 	 return minStock;
  }
- public String getPurchasePrice() {
+ public double getPurchasePrice() {
 	 return purchasePrice;
  }
  
@@ -68,13 +68,10 @@ public String getName() {
 	 this.manufacturerName = newManufacturerName;
  }
  
- public void setProductID(int newProduct) {
-	 this.productID = newProduct;
+ public void setProductID(String newProductID) {
+	 this.productID = newProductID;
  }
  
- public void setModel (String newModel) {
-	 this.setModel = newModel;
- }
  
  public void setCountryOfOrigin(String newCountryOfOrigin) {
 	 this.countryOfOrigin = newCountryOfOrigin;
