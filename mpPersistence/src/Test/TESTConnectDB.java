@@ -10,8 +10,8 @@ public class TESTConnectDB {
 
     @Test
     public void testDatabaseConnection() {
-        String url = "jdbc:sqlserver://hildur.ucn.dk:1433;databaseName=DMA-CSD-S243_10632126;encrypt=true;trustServerCertificate=true;";
-        String user = "DMA-CSD-S243_10632126";
+        String url = "jdbc:sqlserver://hildur.ucn.dk:1433;databaseName=DMA-CSD-S243_10632114;encrypt=true;trustServerCertificate=true;";
+        String user = "DMA-CSD-S243_10632114";
         String password = "Password1!";
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
@@ -25,7 +25,7 @@ public class TESTConnectDB {
     @Test
     public void testDatabaseConnectionFailure() {
         String invalidUrl = "jdbc:sqlserver://invalid.ucn.dk:1433;databaseName=DMA-CSD-S243_10632126;encrypt=true;trustServerCertificate=true;";
-        String user = "DMA-CSD-S243_10632126";
+        String user = "DMA-CSD-S243_10632114";
         String password = "Password1!";
 
         assertThrows(SQLException.class, () -> {
