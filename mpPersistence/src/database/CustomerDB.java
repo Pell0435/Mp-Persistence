@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Customer;
+import model.Product;
 
 public class CustomerDB implements ICustomerDB{
 	
@@ -105,16 +106,18 @@ public class CustomerDB implements ICustomerDB{
 		        }
 		    }
 		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		 private Customer createCustomerFromResultSet(ResultSet rs) throws SQLException {
+		        return new Customer(
+		            rs.getString("cus_Name"),
+		            rs.getString("cus_Email"),
+		            rs.getString("customerCategory"),
+		            rs.getString("cus_Address"),
+		            rs.getString("cus_Zipcode"),
+		            rs.getString("cus_City"),
+		            rs.getString("cus_PhoneNo"),
+		            rs.getInt("customerID")
+		        );
+		    }
 	}
 
 

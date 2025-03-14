@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import model.Employee;
 import model.SalesOrder;
 
 public class SalesOrderDB implements ISalesOrderDB {
@@ -27,8 +28,8 @@ public class SalesOrderDB implements ISalesOrderDB {
                 Date salesDate = rs.getDate("salesDate");
                 String deliveryNote = rs.getString("deliveryNote");
                 boolean deliveryStatus = rs.getBoolean("deliveryStatus");
-                int orderNoFromDb = rs.getInt("OrderNo");
-                Date deliveryDateDb = rs.getDate("DeliveryDate");
+                int orderNoFromDb = rs.getInt("orderNo");
+                Date deliveryDateDb = rs.getDate("deliveryDate");
                 double totalPrice = rs.getDouble("totalPrice"); 
                 LocalDate salesLocalDate = salesDate.toLocalDate();
                 LocalDate deliveryLocalDate = deliveryDateDb != null ? deliveryDateDb.toLocalDate() : null;
@@ -71,6 +72,7 @@ public class SalesOrderDB implements ISalesOrderDB {
             System.out.println("SalesOrder not found.");
         }
     }
+    
     
 }
 
