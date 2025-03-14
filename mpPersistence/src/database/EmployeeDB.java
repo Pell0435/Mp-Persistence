@@ -57,6 +57,30 @@ public class EmployeeDB implements IEmployeeDB {
 	        System.err.println("Error retrieving employees: " + e.getMessage());
 	  }
 	}
+	
+	public void addEmployee(Employee employee) {
+		String query = "INSERT INTO Employees (employeeID, emp_Name, emp_PhoneNo, emp_Email, emp_Role) VALUES (?,?,?,?,?)";
+		try (PreparedStatement stmt = connection.prepareStatement(query)) {
+			stmt.setString(1, employee.getEmployeeID());
+			stmt.setString(2, employee.getName());
+			stmt.setString(3, employee.getPhoneNo());
+			stmt.setString(4, employee.getEmail());
+			stmt.setString(5, employee.getRole());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeEmployee(Employee employee) {
+		String query = "DELETE FROM Employees WHERE employeeID = ?";
+		try (PreparedStatement stmt = connection.prepareStatement(query)) {
+			stmt.setString(1, employee.getEmployeeID());
+			stmt.executeUpdate();
+		}	catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+	}
 	 
 	public static void Main(String[] args) {
 	    EmployeeDB employeeDB = new EmployeeDB();

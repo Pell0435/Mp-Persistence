@@ -1,5 +1,5 @@
 package model;
-// Author: Thomas og Pelle (Getters og setters)
+// Author: Thomas og Pelle og Mikal (Getters og setters)
 public class Product {
 	//All of the private things
 	private String barcode;
@@ -12,26 +12,23 @@ public class Product {
 	private double rentPrice;
 	private String countryOfOrigin;
 	private String productType;
+	private String supplierID;
 	
 	
-	
-	public Product(String barcode,String name,String manufacturerName,int minStock,
-		double pruchasePrice, double salesPrice, double rentPrice, String countryOfOrigin, String productType) {
-		this.barcode=barcode;
-		this.name=name;
-		this.manufacturerName=manufacturerName;
-		this.productID=productID;
-		this.minStock=minStock;
-		this.purchasePrice=purchasePrice;
-		this.salesPrice=salesPrice;
-		this.rentPrice=rentPrice;
-		this.countryOfOrigin=countryOfOrigin;
-		this.productType=productType;
-	
+	//constructor 
+	public Product(String barcode, String name, String manufacturerName, String productID, int minStock, double purchasePrice, double salesPrice, double rentPrice, String countryOfOrigin, String productType, String supplierID) {
+		this.barcode = barcode;
+		this.name = name;
+		this.manufacturerName = manufacturerName;
+		this.productID = productID;
+		this.minStock = minStock;
+		this.purchasePrice = purchasePrice;
+		this.salesPrice = salesPrice;
+		this.rentPrice = rentPrice;
+		this.countryOfOrigin = countryOfOrigin;
+		this.productType = productType;
+		this.supplierID = supplierID;
 	}
-
-	 
-	
 // A lot of getter's	
 public String getName() {
 	 return name;
@@ -68,9 +65,11 @@ public String getName() {
  public double getPurchasePrice() {
 	 return purchasePrice;
  }
- 
- public String getProductType() {
+ public String getProductType(){
 	 return productType;
+ }
+ public String getSupplierID() {
+	 return supplierID;
  }
  
 //Setters incoming
@@ -83,7 +82,7 @@ public String getName() {
 	 this.rentPrice = newRentPrice;
  }
  
- public void SetName (String newName) {
+ public void setName (String newName) {
 	 this.name = newName;
  }
 
@@ -108,13 +107,14 @@ public String getName() {
  public void setMinStock (int newMinStock) {
 	 this.minStock = newMinStock;
  }
- 
- public void setProductType(String newProductType) {
-	 this.productType = newProductType;
+ public void setProductType(String productType) {
+	 this.productType = productType;
  }
- 
- public void setPruchasePrice(double newPurchasePrice) {
-	 this.purchasePrice = newPurchasePrice;
+ public void setSupplierID(String supplierID) {
+	 this.supplierID = supplierID;
  }
- 
+ public void setPurchasePrice(double purchasePrice) {
+	 this.purchasePrice = purchasePrice;
+ }
+
 }

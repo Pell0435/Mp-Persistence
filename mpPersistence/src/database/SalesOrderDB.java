@@ -16,7 +16,7 @@ public class SalesOrderDB implements ISalesOrderDB {
     public SalesOrderDB() {
         this.connection = ConnectDB.getInstance().getConnection();
     }
-
+// Dette var et absolute nightmare!
     public SalesOrder FindSalesOrderByOrderNo(int orderNo) {
         String sql = "SELECT * FROM SalesOrder WHERE OrderNo = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -24,29 +24,28 @@ public class SalesOrderDB implements ISalesOrderDB {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                // Mapping database columns to the SalesOrder constructor
+                Date salesDate = rs.getDate("salesDate");
+                String deliveryNote = rs.getString("deliveryNote");
+                boolean deliveryStatus = rs.getBoolean("deliveryStatus");
                 int orderNoFromDb = rs.getInt("OrderNo");
-                Date deliveryDateDb = rs.getDate("DeliveryDate");  // Assuming the date is in this column
-                boolean deliveryStatus = rs.getBoolean("DeliveryStatus");  // Assuming a boolean column
-                double totalPrice = rs.getDouble("TotalPrice");  // Assuming a numeric column
-                String deliveryNote = rs.getString("DeliveryNote");
-                Date dateDb = rs.getDate("Date");  // Assuming this is another date column
+                Date deliveryDateDb = rs.getDate("DeliveryDate");
+                double totalPrice = rs.getDouble("totalPrice"); 
+                LocalDate salesLocalDate = salesDate.toLocalDate();
+                LocalDate deliveryLocalDate = deliveryDateDb != null ? deliveryDateDb.toLocalDate() : null;
 
-                // Converting SQL Date to LocalDate
-                LocalDate deliveryDate = deliveryDateDb != null ? deliveryDateDb.toLocalDate() : null;
-                LocalDate date = dateDb != null ? dateDb.toLocalDate() : null;
-
-                return new SalesOrder(orderNoFromDb, deliveryDate, deliveryStatus, totalPrice, deliveryNote, date);
+                return new SalesOrder(orderNoFromDb, deliveryLocalDate, deliveryStatus, totalPrice, deliveryNote, salesLocalDate);
             }
+            
         } catch (SQLException e) {
             System.err.println("Error retrieving sales order: " + e.getMessage());
         }
         return null;
     }
 
+
     public static void main(String[] args) {
         SalesOrderDB salesOrderDB = new SalesOrderDB();
-        SalesOrder order = salesOrderDB.FindSalesOrderByOrderNo(2);  // Example order number
+        SalesOrder order = salesOrderDB.FindSalesOrderByOrderNo(2);  // Example number
 
         if (order != null) {
             System.out.println("SalesOrder Found: " + order.getOrderNo());
@@ -54,4 +53,6 @@ public class SalesOrderDB implements ISalesOrderDB {
             System.out.println("SalesOrder not found.");
         }
     }
+    
 }
+
