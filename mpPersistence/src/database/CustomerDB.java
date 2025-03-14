@@ -66,6 +66,34 @@ public class CustomerDB implements ICustomerDB{
 	        System.err.println("Error retrieving customers: " + e.getMessage());
 	  }
 	}
+	
+		public void addCustomer(Customer customer) {
+			  String query = "INSERT INTO Customers (cus_Name, cus_Email, customerCategory, cus_Address, cus_Zipcode, cus_City, cus_PhoneNo, custoemrID) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+		            stmt.setString(1, customer.getName());
+		            stmt.setString(2, customer.getEmail());
+		            stmt.setString(3, customer.getCustomerCategory());
+		            stmt.setString(4, customer.getAddress());
+		            stmt.setString(5, customer.getZipcode());
+		            stmt.setString(6, customer.getCity());
+		            stmt.setString(7, customer.getPhoneNo());
+		            stmt.setInt(8, customer.getCustomerID());
+		            stmt.executeUpdate();
+		        } catch (SQLException e) { 
+		            e.printStackTrace(); // hvis der skulle opstå en fejl, printer den en detaljeret fejlbesked i console
+		        }
+		    }
+			
+		public void removeCustomer(Customer customer) {
+			 String query = "DELETE FROM Customers WHERE customerID = ?";
+		        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+		            stmt.setInt(1, customer.getCustomerID());
+		            stmt.executeUpdate();
+		        } catch (SQLException e) {
+		            e.printStackTrace(); 
+		        }
+		    }
+		
 		 public static void main(String[] args) {
 		        CustomerDB customerDB = new CustomerDB();
 		        Customer cus = customerDB.FindCustomerByCustomerID(02);
