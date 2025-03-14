@@ -6,7 +6,7 @@ import java.time.LocalDate;
  *  @author (Nicklas)
  **/
 public class SalesOrder {
-
+	//Instance variables
 	private int orderNo;
 	private LocalDate deliveryDate;
 	private boolean deliveryStatus;

@@ -2,7 +2,7 @@ package model;
 //Author er Thomas og Pelle
 
 public class Customer {
-	// Privates og pullers
+	// Instance variables
 	private String name;
 	private String address;
 	private String phoneNo;
@@ -12,7 +12,7 @@ public class Customer {
 	private String customerCategory;
 	private int customerID;
 	
-	
+	//Constructor
 	public Customer(String name,String address,String phoneNo, String email,String zipcode,String city, String customerCategory,int customerID) {
 	this.name = name;
 	this.address = address;
@@ -26,7 +26,7 @@ public class Customer {
 	
 	}
 	
-//Getter's incoming!
+//Setters and getters
 public String getName() {
 	return name;
 }
@@ -56,7 +56,6 @@ public String getCustomerCategory() {
 public int getCustomerID(){
 	return customerID;
 }
-// Her kommer setter's
 
 public void setName(String newName) {
 	this.name = newName;

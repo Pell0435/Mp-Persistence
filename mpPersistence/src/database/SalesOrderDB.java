@@ -16,7 +16,7 @@ public class SalesOrderDB implements ISalesOrderDB {
     public SalesOrderDB() {
         this.connection = ConnectDB.getInstance().getConnection();
     }
-// Dette var et absolute nightmare!
+
     public SalesOrder FindSalesOrderByOrderNo(int orderNo) {
         String sql = "SELECT * FROM SalesOrder WHERE OrderNo = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -42,6 +42,24 @@ public class SalesOrderDB implements ISalesOrderDB {
         return null;
     }
 
+    public boolean makeSalesOrder(SalesOrder order) {
+        String sql = "INSERT INTO SalesOrder (OrderNo, SalesDate, DeliveryDate, DeliveryStatus, TotalPrice, DeliveryNote) " +
+                     "VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, order.getOrderNo());
+            stmt.setDate(2, Date.valueOf(order.getDate())); 
+            stmt.setDate(3, order.getDeliveryDate() != null ? Date.valueOf(order.getDeliveryDate()) : null);
+            stmt.setBoolean(4, order.getDeliveryStatus());
+            stmt.setDouble(5, order.getTotalPrice());
+            stmt.setString(6, order.getDeliveryNote());
+
+            int rowsInserted = stmt.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            System.err.println("Error creating sales order: " + e.getMessage());
+        }
+        return false;
+    }
 
     public static void main(String[] args) {
         SalesOrderDB salesOrderDB = new SalesOrderDB();

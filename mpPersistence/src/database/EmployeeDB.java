@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 
 import model.Employee;
+import model.Product;
 
 public class EmployeeDB implements IEmployeeDB {
 	
@@ -81,6 +82,16 @@ public class EmployeeDB implements IEmployeeDB {
 			}
 		
 	}
+	
+	private Employee createEmployeeFromResultSet(ResultSet rs) throws SQLException {
+        return new Employee(
+            rs.getString("employeeID"),
+            rs.getString("emp_Name"),
+            rs.getString("emp_PhoneNo"),
+            rs.getString("emp_Email"),
+            rs.getString("emp_Role")
+        );
+    }
 	 
 	public static void Main(String[] args) {
 	    EmployeeDB employeeDB = new EmployeeDB();

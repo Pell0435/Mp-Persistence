@@ -1,7 +1,7 @@
 package model;
 // Author: Thomas og Pelle og Mikal (Getters og setters)
 public class Product {
-	//All of the private things
+	//Instance variables
 	private String barcode;
 	private String name;
 	private String manufacturerName;
@@ -29,7 +29,7 @@ public class Product {
 		this.productType = productType;
 		this.supplierID = supplierID;
 	}
-// A lot of getter's	
+//setters and getters	
 public String getName() {
 	 return name;
 	 }
@@ -71,9 +71,7 @@ public String getName() {
  public String getSupplierID() {
 	 return supplierID;
  }
- 
-//Setters incoming
- 
+
  public void setSalesPrice (double newSalesPrice) {
 	 this.salesPrice = newSalesPrice;
  }
