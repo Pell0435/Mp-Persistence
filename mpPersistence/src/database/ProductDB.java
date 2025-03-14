@@ -14,7 +14,7 @@ public class ProductDB implements IProductDB {
     private Connection connection;
     private ConnectDB connectDB;
 
-    private ProductDB() {
+    public ProductDB() {
         connectDB = ConnectDB.getInstance();
         connection = connectDB.getConnection();
         assertNotNull(connection, "Database connection should not be null");
