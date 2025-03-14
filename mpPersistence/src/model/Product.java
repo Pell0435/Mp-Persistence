@@ -11,6 +11,25 @@ public class Product {
 	private double salesPrice;
 	private double rentPrice;
 	private String countryOfOrigin;
+	private String productType;
+	
+	
+	
+	public Product(String barcode,String name,String manufacturerName,int minStock,
+		double pruchasePrice, double salesPrice, double rentPrice, String countryOfOrigin, String productType) {
+		this.barcode=barcode;
+		this.name=name;
+		this.manufacturerName=manufacturerName;
+		this.productID=productID;
+		this.minStock=minStock;
+		this.purchasePrice=purchasePrice;
+		this.salesPrice=salesPrice;
+		this.rentPrice=rentPrice;
+		this.countryOfOrigin=countryOfOrigin;
+		this.productType=productType;
+	
+	}
+
 	 
 	
 // A lot of getter's	
@@ -50,6 +69,10 @@ public String getName() {
 	 return purchasePrice;
  }
  
+ public String getProductType() {
+	 return productType;
+ }
+ 
 //Setters incoming
  
  public void setSalesPrice (double newSalesPrice) {
@@ -84,6 +107,14 @@ public String getName() {
  
  public void setMinStock (int newMinStock) {
 	 this.minStock = newMinStock;
+ }
+ 
+ public void setProductType(String newProductType) {
+	 this.productType = newProductType;
+ }
+ 
+ public void setPruchasePrice(double newPurchasePrice) {
+	 this.purchasePrice = newPurchasePrice;
  }
  
 }

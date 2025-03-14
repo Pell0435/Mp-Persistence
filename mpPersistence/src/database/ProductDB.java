@@ -50,13 +50,11 @@ public class ProductDB {
 	        stmt.setString(1, product.getName());  // productName
 	        stmt.setDouble(2, product.getPurchasePrice());  // purchasePrice
 	        stmt.setDouble(3, product.getSalesPrice());  // salesPrice
-	        stmt.setDouble(4, product.getRentPricePerUnit());  // rentPricePerUnit
 	        stmt.setString(5, product.getCountryOfOrigin());  // countryOfOrigin
 	        stmt.setInt(6, product.getMinStock());  // minStock
 	        stmt.setString(7, product.getProductID());  // productID (Primary Key)
 	        stmt.setString(8, product.getProductType());  // productType
 	        stmt.setString(9, product.getBarcode());  // barcode (Unique)
-	        stmt.setString(10, product.getSsid());  // ssid (Foreign Key)
 	        stmt.executeUpdate();  // Executes SQL INSERT
 	    } catch (SQLException e) {
 	        e.printStackTrace();  // Handles any SQL errors
