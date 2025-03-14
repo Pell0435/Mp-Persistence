@@ -5,7 +5,7 @@ import model.Customer;
 public class CustomerController {
 	private CustomerDB customerDB;
 	
-	//Initialiser/Starter customerController
+	
 	public CustomerController() {
         this.customerDB = new CustomerDB(); 
 	}

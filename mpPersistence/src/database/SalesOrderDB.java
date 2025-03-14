@@ -19,12 +19,16 @@ public class SalesOrderDB implements ISalesOrderDB {
     }
 
     public SalesOrder FindSalesOrderByOrderNo(int orderNo) {
+    	//sql query
         String sql = "SELECT * FROM SalesOrder WHERE OrderNo = ?";
+        //Prepared statement
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, orderNo);
+            //The orderNo for the order wished to find
+        	stmt.setInt(1, orderNo);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+            	//Order Info
                 Date salesDate = rs.getDate("salesDate");
                 String deliveryNote = rs.getString("deliveryNote");
                 boolean deliveryStatus = rs.getBoolean("deliveryStatus");
@@ -38,14 +42,17 @@ public class SalesOrderDB implements ISalesOrderDB {
             }
             
         } catch (SQLException e) {
+        	//Exception error
             System.err.println("Error retrieving sales order: " + e.getMessage());
         }
         return null;
     }
 
     public boolean makeSalesOrder(SalesOrder order) {
+    	//sql query
         String sql = "INSERT INTO SalesOrder (OrderNo, SalesDate, DeliveryDate, DeliveryStatus, TotalPrice, DeliveryNote) " +
                      "VALUES (?, ?, ?, ?, ?, ?)";
+        //Prepared statement
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, order.getOrderNo());
             stmt.setDate(2, Date.valueOf(order.getDate())); 
@@ -56,12 +63,14 @@ public class SalesOrderDB implements ISalesOrderDB {
 
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0;
+            //Exception error
         } catch (SQLException e) {
             System.err.println("Error creating sales order: " + e.getMessage());
         }
         return false;
     }
-
+    
+    //Local test
     public static void main(String[] args) {
         SalesOrderDB salesOrderDB = new SalesOrderDB();
         SalesOrder order = salesOrderDB.FindSalesOrderByOrderNo(2);  // Example number

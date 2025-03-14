@@ -6,6 +6,7 @@ import model.Product;
 
 
 public interface IProductDB {
+	//Added methods from ProductDB
 
     void addProduct(Product product);
 

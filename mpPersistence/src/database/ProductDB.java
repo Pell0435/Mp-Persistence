@@ -33,9 +33,12 @@ public class ProductDB implements IProductDB {
 
     // metode til at tilføje et produkt
     public void addProduct(Product product) {
+    	//sql query
         String query = "INSERT INTO Products (productName, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, productID, productType, barcode, ssid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        //Prepared statement
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, product.getName());
+            //Product info
+        	stmt.setString(1, product.getName());
             stmt.setDouble(2, product.getPurchasePrice());
             stmt.setDouble(3, product.getSalesPrice());
             stmt.setDouble(4, product.getRentPrice());
@@ -53,10 +56,14 @@ public class ProductDB implements IProductDB {
 
     // metode til at fjerne et produkt
     public void removeProduct(Product product) {
+    	//sql query
         String query = "DELETE FROM Products WHERE productID = ?";
+        //Prepared statement
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, product.getProductID());
+            //Product ID of the product to be removed
+        	stmt.setString(1, product.getProductID());
             stmt.executeUpdate();
+            //Error Exception
         } catch (SQLException e) {
             e.printStackTrace(); 
         }
@@ -64,13 +71,17 @@ public class ProductDB implements IProductDB {
     // metode til at finde et produkt ved hjælp af dens ID
     public Product findProductByProductID(String productID) {
         Product product = null;
+        //sql query
         String query = "SELECT productName, purchasePrice, salesPrice, rentPrice, countryOfOrigin, minStock, productID, productType, barcode, ssid FROM Products WHERE productID = ?";
+        //Prepared statement
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, productID);
+        	//ProductID for the product to find
+        	stmt.setString(1, productID);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 product = createProductFromResultSet(rs);
             }
+          //Exception error
         } catch (SQLException e) {
             e.printStackTrace();
         }

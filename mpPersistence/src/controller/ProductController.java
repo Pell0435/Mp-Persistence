@@ -9,6 +9,7 @@ public class ProductController {
 	public ProductController(){
 		this.productDB = new ProductDB();
 	}
+	//Adds a new product in the system
 	public Product addProduct(String barcode, String name, String manufacturerName, String productID,
 			int minStock, double purchasePrice, double salesPrice, double rentPrice, String countryOfOrigin, String productType, String supplierID)
 	{
@@ -17,6 +18,7 @@ public class ProductController {
 		return p;
 		
 	}
+	//Finding Products by its ID
 	public Product findProductbyProductID(String Product) {
 		return productDB.findProductByProductID(Product);
 	}

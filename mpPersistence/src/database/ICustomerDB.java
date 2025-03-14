@@ -4,6 +4,7 @@ package database;
 import model.Customer;
 
 public interface ICustomerDB {
+	//Added methods from CustomerDB
 
 		  Customer FindCustomerByCustomerID(int customerID);
 		  
